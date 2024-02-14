@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:plantify/ui/login/loginscreen.dart';
-
+import 'package:plantify/ui/custom_widget/onboardind_widget.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 class OnBoarding extends StatelessWidget {
   static const String routeName = "first onboarding";
   final controller = PageController();
@@ -14,124 +14,30 @@ class OnBoarding extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.transparent,
-      /*body: PageView.builder(  itemCount: onboardingImages.lenght,
-        itemBuilder: (context , index ){
-          Column(
-            children: [
-              Expanded(child: Image.asset(onboardingImages[index])),
-              Expanded(child: Image.asset("assets/images/background_onboarding.png")
-            ],
-          );
+      body: Stack(children: [
+        PageView(
+          controller: controller,
+          children: [
+            OnboardingWidget(
+              imagePath: onboardingImages[0],
+              header: "Plant Identification", content: "snap a photo, and let us unveil the secrets of nature at your fingertips",
+            ),
+            OnboardingWidget(imagePath: onboardingImages[1],header: "Disease Detection",content: "just capture a photo, and we'll analyze it to help you proactively identify and address potential plant health concerns",),
+            OnboardingWidget(imagePath: onboardingImages[2],header: "Recomend Treatment",content: "ensuring you receive the most effective and personalized wellness guidance",),
+            OnboardingWidget(imagePath: "assets/images/logo_vertivcal.png")
+          ],
+        ),
+        Container(
+          alignment: Alignment(0,.8),
+            child: SmoothPageIndicator(controller: controller, count: onboardingImages.length,effect: SwapEffect(
+              dotHeight: 10,
+              dotWidth: 10,
+              dotColor: Colors.white,
+              activeDotColor: Colors.white60,
 
-        }),*/
-      body: PageView(
+            ),))
 
-        children: [
-          Container(
-            margin: EdgeInsets.zero,
-            padding: EdgeInsets.zero,
-            color: Colors.white,
-            child: Column(
-              children: [
-                Expanded(
-                    child: Image.asset(
-                  onboardingImages[0],
-                )),
-                Stack(
-                  children: [
-                    Expanded(
-                        child: Image.asset(
-                            "assets/images/background_onboarding.png",
-                            width: double.infinity,
-                            fit: BoxFit.fitWidth)),
-                    Text(
-                      "Treatment Reccomendation",
-                      style: Theme.of(context).textTheme.headline1,
-                    )
-                  ],
-                )
-              ],
-            ),
-          ),
-          Container(
-            margin: EdgeInsets.zero,
-            padding: EdgeInsets.zero,
-            color: Colors.white,
-            child: Column(
-              children: [
-
-                Expanded(
-                    child: Image.asset(
-                  onboardingImages[1],
-                )),
-                Stack(
-                  children: [
-                    Expanded(
-                        child: Image.asset(
-                            "assets/images/background_onboarding.png",
-                            width: double.infinity,
-                            fit: BoxFit.fitWidth)),
-                    Text(
-                      "Treatment Reccomendation",
-                      style: Theme.of(context).textTheme.headline1,
-                    )
-                  ],
-                )
-              ],
-            ),
-          ),
-          Container(
-            margin: EdgeInsets.zero,
-            padding: EdgeInsets.zero,
-            color: Colors.white,
-            child: Column(
-              children: [
-                Expanded(
-                    child: Image.asset(
-                  onboardingImages[2],
-                )),
-                Stack(
-                  children: [
-                    Expanded(
-                        child: Image.asset(
-                            "assets/images/background_onboarding.png",
-                            width: double.infinity,
-                            fit: BoxFit.fitWidth)),
-                    Text(
-                      "Treatment Reccomendation",
-                      style: Theme.of(context).textTheme.headline1,
-                    )
-                  ],
-                )
-              ],
-            ),
-          ),
-          Container(
-            margin: EdgeInsets.zero,
-            padding: EdgeInsets.zero,
-            color: Colors.white,
-            child: Column(
-              children: [
-                Expanded(
-                    child: Image.asset(
-                  "assets/images/logo_vertivcal.png",
-                )),
-                Stack(
-                  children: [
-                    Expanded(
-                        child: Image.asset(
-                            "assets/images/background_onboarding.png",
-                            width: double.infinity,
-                            fit: BoxFit.fitWidth)),
-                    ElevatedButton(onPressed:(){ Navigator.pushReplacementNamed(context, LogInScreen.routeName);},
-                        child: Text("bbb"))
-                  ],
-                )
-              ],
-            ),
-          ),
-        ],
-      ),
+      ]),
     );
   }
 }
