@@ -60,7 +60,7 @@ class _HomeScreenState extends State<HomeScreen> {
             iconSize: 20,
             type: BottomNavigationBarType.fixed,
             // Disable animation
-            backgroundColor: Colors.transparent,
+            backgroundColor: Colors.transparent ,
         selectedItemColor: Color(0xff82CD3E),
             elevation: 0,
             unselectedItemColor: Color(0xff8C8C8C),
