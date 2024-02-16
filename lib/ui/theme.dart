@@ -20,27 +20,8 @@ class AppTheme {
       backgroundColor: mainBackground,
 centerTitle: true ,
 
-    ),
-    textTheme: TextTheme(
-headline1: TextStyle(
-  fontSize: 30,
-  color: mainBackground,
+    ));
 
-),
-    headline2: TextStyle(
-        fontSize: 28,
-      color: darkText,
-    ),
-      bodyText2: TextStyle(
-        fontSize: 12,
-        color: lightText,
-        //بتاعه التابس
-        // reviews الناس
-      ),
-
-    ),
-      fontFamily:"Poppins",
-  );
 
 
 }
