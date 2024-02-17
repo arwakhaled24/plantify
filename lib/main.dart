@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:plantify/ui/home/Home.dart';
 import 'package:plantify/ui/login/loginscreen.dart';
 import 'package:plantify/ui/onboardin/onboarding.dart';
 import 'package:plantify/ui/splash/spashScreen.dart';
@@ -16,11 +17,13 @@ class MyApp extends StatelessWidget {
       title: 'PLantify',
       debugShowCheckedModeBanner: false,
       theme:AppTheme.theme,
-      initialRoute: SplashScreen.routeName,
+      initialRoute:  HomeScreen.routeName,
       routes: {
         SplashScreen.routeName : (context)=>SplashScreen(),
         LogInScreen.routeName : (context)=>LogInScreen(),
-        OnBoarding.routeName :(context)=>OnBoarding()
+        OnBoarding.routeName :(context)=>OnBoarding(),
+        HomeScreen.routeName :(context)=>HomeScreen()
+
       },
 
     );
