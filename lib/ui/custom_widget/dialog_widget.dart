@@ -77,7 +77,7 @@ class DialogScreen {
           actions: actions,
         );
       },
-    )!;
+    );
   }
   static void hideDialog (context){
     Navigator.pop(context);
