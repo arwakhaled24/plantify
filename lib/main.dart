@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
       title: 'PLantify',
       debugShowCheckedModeBanner: false,
       theme:AppTheme.theme,
-      initialRoute:  HomeScreen.routeName,
+      initialRoute:  LogInScreen.routeName,
       routes: {
         SplashScreen.routeName : (context)=>SplashScreen(),
         LogInScreen.routeName : (context)=>LogInScreen(),
@@ -25,6 +25,7 @@ class MyApp extends StatelessWidget {
         HomeScreen.routeName :(context)=>HomeScreen()
 
       },
+
 
     );
   }
