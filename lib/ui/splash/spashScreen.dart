@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:plantify/ui/login/sign_in_screen.dart';
 import 'package:plantify/ui/onboardin/onboarding.dart';
 
 @override
