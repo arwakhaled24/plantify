@@ -1,57 +1,46 @@
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:plantify/ui/custom_widget/text_form_feild_widget.dart';
 import 'package:plantify/ui/custom_widget/text_label.dart';
-import 'package:plantify/ui/login/cubit/login_state.dart';
-import 'package:plantify/ui/login/cubit/login_view_model.dart';
+import 'package:plantify/ui/home/Home.dart';
+import 'package:plantify/ui/login/sign_in_view_model.dart';
+import 'package:plantify/ui/login/sign_in_navigator.dart';
 import 'package:plantify/ui/sign_up/sign_up.dart';
 import 'package:plantify/ui/theme.dart';
+import 'package:provider/provider.dart';
 
 import '../custom_widget/dialog_widget.dart';
 
-class LogInScreen extends StatelessWidget {
+class SignInScreen extends StatefulWidget {
   static const String routeName = "login screen";
-  var formkey = GlobalKey<FormState>();
-  var emailControler = TextEditingController();
-  var passeordControler = TextEditingController();
-  LogInViewModel viewModel = LogInViewModel();
 
+  @override
+  State<SignInScreen> createState() => _SignInScreenState();
+}
+
+class _SignInScreenState extends State<SignInScreen> implements SignInNavigator{
+  var formkey = GlobalKey<FormState>();
+
+  var emailControler = TextEditingController();
+
+  var passeordControler = TextEditingController();
+
+ SignInViewModel viewModel = SignInViewModel();
+  void initState() {
+    // TODO: implement initState
+    viewModel.navigator= this ;
+  }
   @override
   Widget build(BuildContext context) {
     var hight = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
-    return BlocListener<LogInViewModel,LogInViewStates>(
-      bloc:viewModel ,
-
-      listener: (context , state){
-        if(state==ErrorState( errorMessagee: "something went wrong")){
-
-          DialogScreen.showmessage(context, "something went wrong");
-        }
-        if(state==LoadingState()){
-         DialogScreen.showprogresDialog(context, "loading...");
-        }
-
-        if(state==SuccssState){
-          DialogScreen.showmessage(context, "User register successfully");
-        }
-      },
-     listenWhen: (previous , current){
-        if(previous is LoadingState){
-          DialogScreen.hideDialog(context);
-        }
-        if(current is SuccssState||current is ErrorState|| current is LoadingState){
-          return true ;
-        }{
-          return false;
-        }
-     },
+    return ChangeNotifierProvider(
+      create: (context)=> viewModel,
       child: Scaffold(
         backgroundColor: AppTheme.background,
         body: Container(
-      
+
            padding:EdgeInsets.all(20) ,
           child: Column(
             children: [
@@ -106,8 +95,7 @@ class LogInScreen extends StatelessWidget {
                       SizedBox(height: hight*.03,),
                       ElevatedButton(
                         onPressed: () {
-                          viewModel.apiManager.sign_in(emailControler.text, passeordControler.text);
-
+  viewModel.signin(emailControler.text, passeordControler.text);
                           // Button press logic
                         },
                         style: ElevatedButton.styleFrom(
@@ -116,7 +104,7 @@ class LogInScreen extends StatelessWidget {
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8.0),
                           ),
-      
+
                      backgroundColor: Colors.transparent
                         ),
                         child: Container(
@@ -147,10 +135,10 @@ class LogInScreen extends StatelessWidget {
                     ],
                   ),
                 ),
-          
+
               ),
-          
-          
+
+
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -169,13 +157,38 @@ class LogInScreen extends StatelessWidget {
                   ),
                 ],
               )
-          
-          
+
+
             ],
-          
+
           ),
         ),
       ),
     );
   }
+
+  @override
+  void ShowLoading(String text) {
+    // TODO: implement ShowLoading
+    DialogScreen.showmessage(context, "loading...");
+  }
+
+  @override
+  void HideLoading() {
+    // TODO: implement hideLoading
+    Navigator.pop(context);
+  }
+
+  @override
+  void ShowMessage(String message, {String? posActionTitle, VoidCallback? posAction, String? negActionTitle, VoidCallback? negAction, bool isDissMissable = true}) {
+    // TODO: implement showMessage
+    DialogScreen.showprogresDialog(context, message);
+  }
+
+  @override
+  void NavigateToHomeScreen() {
+    // TODO: implement navigatetohomescreen
+    Navigator.pushReplacementNamed(context, HomeScreen.routeName);
+  }
+
 }

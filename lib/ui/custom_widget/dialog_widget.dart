@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:plantify/ui/theme.dart';
 
 class DialogScreen {
   static void showprogresDialog(context, String? text,
@@ -43,7 +44,7 @@ class DialogScreen {
             child: Text(
               posActionTitle ?? "",
               style: TextStyle(
-                color: Theme.of(context).primaryColor,
+                color: AppTheme.darkText,
                 fontSize: 18,
                 fontWeight: FontWeight.w500,
               ),

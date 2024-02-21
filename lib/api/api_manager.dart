@@ -13,14 +13,16 @@ class ApiManager{
   ]);
   //https://PlantifyApp.bsite.net/api/Account/Login
    static const  String base_url="PlantifyApp.bsite.net";
-     String endpoint = "/api/Account/Login";
-    Future<SignInRespond> sign_in(String email, String password)async{
+    static const String endpoint = "/api/Account/Login";
+    static Future<SignInRespond> sign_in(String email, String password)async{
        var uri = Uri.https(base_url,endpoint);
        var requestbody = SignInReq(
          email: email,
          password: password,
        );
- var respond = await http.post(uri,body: requestbody.toJson());
+ var respond = await http.post(uri,body: jsonEncode(requestbody.toJson()),headers: {
+   "Content-Type":"application/json"
+ });
  var signInResponse= SignInRespond.fromJson(jsonDecode(respond.body));
  return signInResponse ;
 

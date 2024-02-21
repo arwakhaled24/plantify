@@ -39,6 +39,7 @@ dependencies:
   flutter_bloc: ^8.1.4
   http: ^0.13.3
   http_interceptor: ^1.0.1
+  provider: ^6.1.1
 
 
 
