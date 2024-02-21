@@ -10,6 +10,7 @@ class LabelTextForm extends StatelessWidget {
     return Text(text,style: TextStyle(
         color: AppTheme.darkText,
         fontSize: 18,
+        fontFamily: "Poppins",
         fontWeight: FontWeight.w500
     ),
     );

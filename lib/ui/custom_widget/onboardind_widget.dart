@@ -3,12 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 class OnboardingWidget extends StatelessWidget {
   String imagePath;
-  String? header;
-String? content;
+  String header;
+String content;
+  ElevatedButton? button;
   OnboardingWidget({
     required this.imagePath,
     this.header = "",
-    this.content = ""
+    this.content = "",
+    this.button  ,
   });
   Widget build(BuildContext context) {
     var hight = MediaQuery.of(context).size.height;
@@ -27,17 +29,16 @@ String? content;
           Stack(
             alignment: AlignmentDirectional.center,
             children: [
-              Expanded(
-                  child: Image.asset("assets/images/background_onboarding.png",
-                      width: double.infinity, fit: BoxFit.fitWidth)),
+              Expanded(child: Image.asset("assets/images/background_onboarding.png", width: double.infinity, fit: BoxFit.fitWidth)),
               Positioned(
                 child: Text(
-                  header!,
+                  header??"",
                   style: TextStyle(
                       color: Colors.white,
-                      fontSize: 30,
+                      fontSize: 29,
                       fontFamily: "Poppins",
-                      fontWeight: FontWeight.w500),
+
+                      fontWeight: FontWeight.w700),
                   textAlign: TextAlign.center,
                 ),
                 height: hight * .3,
@@ -45,17 +46,28 @@ String? content;
               ),
               Positioned(
                 child: Text(
-                  content!,
+                  content??"",
                   style: TextStyle(
                       color: Colors.white,
-                      fontSize: 12,
+                      fontSize: 14,
                       fontFamily: "Poppins",
                       fontWeight: FontWeight.w500),
                   textAlign: TextAlign.center
                 ),
-                height: hight * .04,
-                width: width * .5,
+                height: hight * .07,
+                width: width * .8,
               ),
+
+                if(button != null)
+                SizedBox(
+                  child: button,
+                  width: width * .8,
+                  height: hight * .08,
+                )
+            ,
+
+
+
             ],
           )
         ],

@@ -40,6 +40,7 @@ class TextFormFeildWidget extends StatelessWidget {
         hintText: hintText,
         hintStyle: TextStyle(
           fontWeight: FontWeight.w300,
+          fontFamily: "Poppins",
           color: AppTheme.lightText,
           fontSize: 18,
         ),

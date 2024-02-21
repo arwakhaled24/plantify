@@ -13,8 +13,9 @@ class DialogScreen {
               Text(
                 text ?? "",
                 style: TextStyle(
-                    color:Theme.of(context).primaryColor,
+                    color: AppTheme.darkText,
                     fontSize: 16,
+                    fontFamily: "Poppins",
                     fontWeight: FontWeight.w400),
               )
             ]),
@@ -45,6 +46,7 @@ class DialogScreen {
               posActionTitle ?? "",
               style: TextStyle(
                 color: AppTheme.darkText,
+                fontFamily: "Poppins",
                 fontSize: 18,
                 fontWeight: FontWeight.w500,
               ),
@@ -63,8 +65,9 @@ class DialogScreen {
             child: Text(
               negActionTitle ?? "",
               style: TextStyle(
-                color: Theme.of(context).primaryColor,
+                color:  AppTheme.darkText,
                 fontSize: 18,
+                fontFamily: "Poppins",
                 fontWeight: FontWeight.w500,
               ),
             ),
@@ -72,8 +75,9 @@ class DialogScreen {
         }
         return AlertDialog(
           content: Text(message,style: TextStyle(
-              color: Theme.of(context).primaryColor,
+              color:  AppTheme.darkText,
               fontSize: 16,
+              fontFamily: "Poppins",
               fontWeight: FontWeight.w400),),
           actions: actions,
         );
