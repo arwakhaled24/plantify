@@ -30,15 +30,15 @@ static const String endpointSignUp="/api/Account/Register";
 
      }
 
-     static Future<SigningRespond> SignUp(String name , String email , String password , String phone ) async{
+     static Future<SigningRespond> SignUp(String name, String password ,String phone, String email ) async{
  var uri = Uri.https(baseUrl , endpointSignUp,);
-    var requestbody =SignUpRequest(password: password,email:email,displayName: name,phoneNumber: phone );
+    var requestBody =SignUpRequest(displayName: name , email: email, phoneNumber: phone,password: password );
 
-var response = await  http.post(uri , body: jsonEncode(requestbody.toJson()),headers:{
+var response = await  http.post(uri , body: jsonEncode(requestBody.toJson()),headers:{
   "Content-Type":"application/json"
 } );
- var SignUpresponse = SigningRespond.fromJson(jsonDecode(response.body));
- return SignUpresponse;
+ var signUpResponse = SigningRespond.fromJson(jsonDecode(response.body));
+ return signUpResponse;
 
      }
 

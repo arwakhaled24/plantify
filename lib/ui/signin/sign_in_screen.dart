@@ -20,6 +20,8 @@ class SignInScreen extends StatefulWidget {
 
 class _SignInScreenState extends State<SignInScreen>
     implements SignInNavigator {
+  final formKeySignIn = GlobalKey<FormState>();
+
 
   var emailControler = TextEditingController();
 
@@ -33,7 +35,6 @@ class _SignInScreenState extends State<SignInScreen>
   @override
   Widget build(BuildContext context) {
     var hight = MediaQuery.of(context).size.height;
-    var width = MediaQuery.of(context).size.width;
     return ChangeNotifierProvider(
       create: (context) => viewModel,
       child: Scaffold(
@@ -64,85 +65,100 @@ class _SignInScreenState extends State<SignInScreen>
               ),
               Expanded(
                 child: SingleChildScrollView(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SizedBox(
-                        height: hight * .15,
-                      ),
-                      LabelTextForm(
-                        text: "Email",
-                      ),
-                      SizedBox(
-                        height: hight * .02,
-                      ),
-                      TextFormFeildWidget(
-                        controler: emailControler,
-                        hintText: "enter your email ",
-                        validator: (text) {},
-                      ),
-                      SizedBox(
-                        height: hight * .04,
-                      ),
-                      LabelTextForm(
-                        text: "Password",
-                      ),
-                      SizedBox(
-                        height: hight * .02,
-                      ),
-                      TextFormFeildWidget(
-                        validator: (text) {},
-                        controler: passeordControler,
-                        hintText: "enter your password ",
-                        isPassword: true,
-                      ),
-                      SizedBox(
-                        height: hight * .03,
-                      ),
-                      ElevatedButton(
-                        onPressed: () {
-                          ////////////
-////////////////////////////////////////////
-                          viewModel.signin(emailControler.text, passeordControler.text);
-                          // Button press logic
-                        },
-                        style: ElevatedButton.styleFrom(
-                            elevation: 0, // Set elevation as needed
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 0, vertical: 0),
-                            shape: RoundedRectangleBorder(
+                  child: Form(
+                    key: formKeySignIn,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          height: hight * .15,
+                        ),
+                        LabelTextForm(
+                          text: "Email",
+                        ),
+                        SizedBox(
+                          height: hight * .02,
+                        ),
+                        TextFormFeildWidget(
+                          controler: emailControler,
+                          hintText: "enter your email ",
+                          validator: (text) {
+                            if(text!.isEmpty){
+                              return "email is required";
+                            }
+                          },
+                        ),
+                        SizedBox(
+                          height: hight * .04,
+                        ),
+                        LabelTextForm(
+                          text: "Password",
+                        ),
+                        SizedBox(
+                          height: hight * .02,
+                        ),
+                        TextFormFeildWidget(
+                          validator: (text) {
+                            if(text!.isEmpty){
+                              return "password is required";
+                            }
+                          },
+                          controler: passeordControler,
+                          hintText: "enter your password ",
+                          isPassword: true,
+                        ),
+                        SizedBox(
+                          height: hight * .03,
+                        ),
+                        ElevatedButton(
+                          onPressed: () {
+                            ////////////
+                    ////////////////////////////////////////////
+                            signin( emailControler.text, passeordControler.text);
+                            // Button press logic
+/*
+                            viewModel.signin(emailControler.text, passeordControler.text);
+*/
+
+                          },
+                          style: ElevatedButton.styleFrom(
+                              elevation: 0, // Set elevation as needed
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 0, vertical: 0),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                              backgroundColor: Colors.transparent),
+                          child: Container(
+                            height: 60,
+                            decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                                begin: Alignment.topLeft,
+                                end: Alignment.bottomRight,
+                                colors: [
+                                  Color(
+                                      0xFFAEDC81), // Lighter color on one side
+                                  Color(
+                                      0xFF6CC51D), // Regular color on the other side
+                                ],
+                              ),
                               borderRadius: BorderRadius.circular(8.0),
                             ),
-                            backgroundColor: Colors.transparent),
-                        child: Container(
-                          height: 60,
-                          decoration: BoxDecoration(
-                            gradient: LinearGradient(
-                              begin: Alignment.topLeft,
-                              end: Alignment.bottomRight,
-                              colors: [
-                                Color(
-                                    0xFFAEDC81), // Lighter color on one side
-                                Color(
-                                    0xFF6CC51D), // Regular color on the other side
-                              ],
-                            ),
-                            borderRadius: BorderRadius.circular(8.0),
-                          ),
-                          child: Center(
-                            child: Text(
-                              'Sign In',
-                              style: TextStyle(
-                                  color:
-                                      AppTheme.mainBackground, // Text color
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: "Poppins",
-                                  fontSize: 18),
+                            child: Center(
+                              child: Text(
+                                'Sign In',
+                                style: TextStyle(
+                                    color:
+                                        AppTheme.mainBackground, // Text color
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: "Poppins",
+                                    fontSize: 18),
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -197,12 +213,18 @@ class _SignInScreenState extends State<SignInScreen>
       String? negActionTitle,
       VoidCallback? negAction,
       bool isDissMissable = true}) {
-    // TODO: implement showMessage
     DialogScreen.showprogresDialog(context, message);
   }
 
   @override
   void NavigateToHomeScreen() {
     Navigator.pushReplacementNamed(context, HomeScreen.routeName);
+  }
+
+  void signin(String email , String password) {
+    if (formKeySignIn.currentState?.validate()!=true) {
+return;    }
+    viewModel.signin(email, password);
+
   }
 }

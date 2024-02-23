@@ -12,9 +12,9 @@ ApiManager apiManager;
   }
 
   @override
-  Future<SigningRespond> signUpWithEmailAndPassword(String name, String email, String phone, String password) {
+  Future<SigningRespond> signUpWithEmailAndPassword(String name, String password ,String phone, String email) {
     // TODO: implement signUpWithEmailAndPassword
-    return ApiManager.SignUp(name, email, password, phone);
+    return ApiManager.SignUp(name, password, phone,email);
 
   }
   

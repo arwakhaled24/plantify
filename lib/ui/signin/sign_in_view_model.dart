@@ -12,21 +12,17 @@ class SignInViewModel extends ChangeNotifier{
   late AuthRepository authRepostory = AuthRepositoryImp(onlineDatASource);
   void signin(String email, String password)async{
     try{
-      // show loading
-      //navigator.ShowLoading("loading ");
+      navigator.ShowLoading("loading ");
       var response = await authRepostory.signInWithEmailAndPassword(email, password);
-      if(response.statusCode!=null){
-        // hide loading
+      if(response.displayName!=null){
         navigator.HideLoading();
-        // navigate to homescreen :
         navigator.NavigateToHomeScreen();
-        // show message for now
-        navigator.ShowLoading(response.message??"");
+
       }
       else{
         navigator.HideLoading();
-        navigator.NavigateToHomeScreen();
-        //navigator.ShowLoading(response.message??"");
+        navigator.ShowLoading(response.message??"");
+        print(response.statusCode);
       }
     }catch(e){
       // hide lodaing

@@ -18,7 +18,7 @@ class SignUpViewModel extends ChangeNotifier{
       // show loading
 
       navigator.ShowLoading("loading ");
-      var response = await authRepostory.signUpWithEmailAndPassword(email, password, name, phone);
+      var response = await authRepostory.signInWithEmailAndPassword( email , password);
       if(response.statusCode!=null){
         // hide loading
         navigator.HideLoading();
