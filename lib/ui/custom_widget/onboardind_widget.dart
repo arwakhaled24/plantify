@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 class OnboardingWidget extends StatelessWidget {
   String imagePath;
   String header;
@@ -12,6 +10,7 @@ String content;
     this.content = "",
     this.button  ,
   });
+  @override
   Widget build(BuildContext context) {
     var hight = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
@@ -31,9 +30,11 @@ String content;
             children: [
               Expanded(child: Image.asset("assets/images/background_onboarding.png", width: double.infinity, fit: BoxFit.fitWidth)),
               Positioned(
+                height: hight * .3,
+                width: width * .5,
                 child: Text(
                   header??"",
-                  style: TextStyle(
+                  style: const TextStyle(
                       color: Colors.white,
                       fontSize: 29,
                       fontFamily: "Poppins",
@@ -41,13 +42,11 @@ String content;
                       fontWeight: FontWeight.w700),
                   textAlign: TextAlign.center,
                 ),
-                height: hight * .3,
-                width: width * .5,
               ),
               Positioned(
                 child: Text(
                   content??"",
-                  style: TextStyle(
+                  style: const TextStyle(
                       color: Colors.white,
                       fontSize: 14,
                       fontFamily: "Poppins",

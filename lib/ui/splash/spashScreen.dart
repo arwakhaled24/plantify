@@ -4,9 +4,12 @@ import 'package:plantify/ui/onboardin/onboarding.dart';
 @override
 class SplashScreen extends StatelessWidget {
   static const String routeName = "splash screen ";
+
+  const SplashScreen({super.key});
+  @override
   Widget build(BuildContext context) {
     Future.delayed(
-      Duration(seconds: 2),
+      const Duration(seconds: 2),
       () {
         Navigator.pushReplacementNamed(context, OnBoarding.routeName);
       },

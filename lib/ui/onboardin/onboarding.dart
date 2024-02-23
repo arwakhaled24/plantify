@@ -13,6 +13,9 @@ class OnBoarding extends StatelessWidget {
     "assets/images/onboardin3.png",
     "assets/images/logo_vertivcal.png"
   ];
+
+  OnBoarding({super.key});
+  @override
   Widget build(BuildContext context) {
     var hight = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
@@ -70,8 +73,8 @@ class OnBoarding extends StatelessWidget {
           ],
         ),
         Container(
-          alignment: Alignment(0,.8),
-            child: SmoothPageIndicator(controller: controller, count: onboardingImages.length,effect: SwapEffect(
+          alignment: const Alignment(0,.8),
+            child: SmoothPageIndicator(controller: controller, count: onboardingImages.length,effect: const SwapEffect(
               dotHeight: 10,
               dotWidth: 10,
               dotColor: Colors.white,
