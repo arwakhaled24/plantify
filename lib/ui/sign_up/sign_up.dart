@@ -136,11 +136,24 @@ class _SignUpScreenState extends State<SignUpScreen>
                         controler: passwordController,
                         hintText: "please enter your password",
                         validator: (text) {
+                          RegExp specialCharRegex = RegExp(r'[!@#\$%^&*(),.?":{}|<>]');
+
                           if (text == null || text.trim().isEmpty) {
-                            return "please enter Password";
+                            return "please enter Password must contain special caracters, capital caracters and numbers";
                           }
                           if (text.length < 6) {
-                            return "Short password & make shure that contain cpesial caracters and capital cases";
+                            return "Short password ";
+                          }
+                          if(!specialCharRegex.hasMatch(text)) {
+                            return "password must contain special caracters";
+                          }
+                          RegExp capitalCharRegex = RegExp(r'[A-Z]');
+                           if(!capitalCharRegex.hasMatch(text)) {
+                              return "password must contain capital caracters";
+                            }
+                          RegExp numbersRegex = RegExp(r'[0-9]');
+                          if(!numbersRegex.hasMatch(text)) {
+                            return "password must contain numbers";
                           }
                         },
                         isPassword: true,
