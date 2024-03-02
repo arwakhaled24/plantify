@@ -5,7 +5,16 @@ import 'package:plantify/ui/sign_up/sign_up.dart';
 import 'package:plantify/ui/signin/sign_in_screen.dart';
 import 'package:plantify/ui/splash/spashScreen.dart';
 import 'package:plantify/ui/theme.dart';
+import 'dart:io';
+class MyHttpOverrides extends HttpOverrides{
+  @override
+  HttpClient createHttpClient(SecurityContext? context){
+    return super.createHttpClient(context)
+      ..badCertificateCallback = (X509Certificate cert, String host, int port)=> true;
+  }
+}
 void main() {
+  HttpOverrides.global = MyHttpOverrides();
   runApp(const MyApp());
 }
 class MyApp extends StatelessWidget {
@@ -24,7 +33,6 @@ class MyApp extends StatelessWidget {
         OnBoarding.routeName :(context)=>OnBoarding(),
         HomeScreen.routeName :(context)=>HomeScreen(),
         SignUpScreen.routeName :(context)=>SignUpScreen(),
-
       },
 
 
