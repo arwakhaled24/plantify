@@ -24,65 +24,24 @@ class DialogScreen {
         barrierDismissible: dismissable);
   }
 
-  static  void showmessage(context, String message, {String? posActionTitle,
-    VoidCallback? posAction,
-    String? negActionTitle,
-    VoidCallback? negAction,
-    bool isDissMissable = true,
-  }) {
+  static  void showmessage(context, String message){
     showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        List<Widget> actions = [];
-        if (posActionTitle != null) {
-          actions.add(TextButton(
-            onPressed: () {
-              Navigator.pop(context);
-              if (posAction != null) {
-                posAction();
-              }
-            },
-            child: Text(
-              posActionTitle ?? "",
-              style: TextStyle(
-                color: AppTheme.darkText,
-                fontFamily: "Poppins",
-                fontSize: 18,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-          ));
-        }
-
-        if (negAction != null) {
-          actions.add(TextButton(
-            onPressed: () {
-              Navigator.pop(context);
-              if (negAction != null) {
-                negAction();
-              }
-            },
-            child: Text(
-              negActionTitle ?? "",
-              style: TextStyle(
-                color:  AppTheme.darkText,
-                fontSize: 18,
-                fontFamily: "Poppins",
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-          ));
-        }
-        return AlertDialog(
-          content: Text(message,style: TextStyle(
-              color:  AppTheme.darkText,
-              fontSize: 16,
-              fontFamily: "Poppins",
-              fontWeight: FontWeight.w400),),
-          actions: actions,
-        );
-      },
-    );
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            content: Row(children: [
+              Text(
+                message ?? "",
+                style: TextStyle(
+                    color: AppTheme.green_2,
+                    fontSize: 16,
+                    debugLabel: "Poppins",
+                    fontWeight: FontWeight.w400),
+              )
+            ]),
+          );
+        },
+        barrierDismissible: true);
   }
   static void hideDialog (context){
     Navigator.pop(context);

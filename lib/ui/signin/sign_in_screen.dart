@@ -206,24 +206,21 @@ class _SignInScreenState extends State<SignInScreen>
     Navigator.pop(context);
   }
 
-  @override
-  void ShowMessage(String message,
-      {String? posActionTitle,
-      VoidCallback? posAction,
-      String? negActionTitle,
-      VoidCallback? negAction,
-      bool isDissMissable = true}) {
-    DialogScreen.showprogresDialog(context, message);
-  }
 
   @override
   void NavigateToHomeScreen() {
     Navigator.pushReplacementNamed(context, HomeScreen.routeName);
   }
 
+  @override
+  void ShowMessage(String message, {bool isDissMissable = true}) {
+    DialogScreen.showmessage(context, message);
+    }
+
+
   void signin(String email , String password) {
     if (formKeySignIn.currentState?.validate()!=true) {
-return;    }
+      return;    }
     viewModel.signin(email, password);
 
   }

@@ -33,7 +33,6 @@ class MyApp extends StatelessWidget {
         OnBoarding.routeName :(context)=>OnBoarding(),
         HomeScreen.routeName :(context)=>HomeScreen(),
         SignUpScreen.routeName :(context)=>SignUpScreen(),
-
       },
 
 

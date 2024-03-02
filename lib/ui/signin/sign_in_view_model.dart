@@ -14,15 +14,14 @@ class SignInViewModel extends ChangeNotifier{
     try{
       navigator.ShowLoading("loading ");
       var response = await authRepostory.signInWithEmailAndPassword(email, password);
-      if(response.displayName!=null){
+      if(response.message!=null){
+        navigator.HideLoading();
+        navigator.ShowMessage(response.message??"");
+        print(response.message);
+      }
+      else if(response.displayName!=null){
         navigator.HideLoading();
         navigator.NavigateToHomeScreen();
-
-      }
-      else{
-        navigator.HideLoading();
-        navigator.ShowLoading(response.message??"");
-        print(response.statusCode);
       }
     }catch(e){
       // hide lodaing
@@ -30,16 +29,5 @@ class SignInViewModel extends ChangeNotifier{
       // show (e)
       navigator.ShowMessage(e.toString());
     }
-
   }
-
-
-
-
-
-
-
-
-
-
 }
