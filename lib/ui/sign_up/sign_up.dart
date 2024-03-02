@@ -176,15 +176,7 @@ class _SignUpScreenState extends State<SignUpScreen>
                               passwordController.text,
                               phoneController.text,
                               emailController.text);
-                          //
-                          //
-                          //
-                          ///
-                          /// ///
-                          /// //
-                          /// //
-                          /// //
-                          ///
+
                         },
                         style: ElevatedButton.styleFrom(
                             elevation: 0, // Set elevation as needed

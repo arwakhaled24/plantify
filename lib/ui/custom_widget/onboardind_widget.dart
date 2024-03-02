@@ -35,7 +35,7 @@ String content;
                   header??"",
                   style: TextStyle(
                       color: Colors.white,
-                      fontSize: 29,
+                      fontSize: 28,
                       fontFamily: "Poppins",
 
                       fontWeight: FontWeight.w700),
