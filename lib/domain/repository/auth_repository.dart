@@ -1,8 +1,9 @@
-import 'package:plantify/data/model/respose/Signing_respond.dart';
+
+import '../../data/model/respose/Signing_respond.dart';
 
 abstract class AuthRepository {
   Future<SigningRespond> signInWithEmailAndPassword(String email, String password);
-  Future<SigningRespond> signUpWithEmailAndPassword(String email, String password, String name, String phone);
+  Future<SigningRespond> signUpWithEmailAndPassword(String name, String password ,String phone, String email);
 
  /* Future<void> signInWithGoogle();
   Future<void> signInWithFacebook();

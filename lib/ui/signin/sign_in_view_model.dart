@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:plantify/ui/signin/sign_in_navigator.dart';
 import '../../data/api/api_manager.dart';
-import '../../data/dataScource/auth_data_scource.dart';
-import '../../data/repository/auth_repo_imp.dart';
+import '../../data/dataSourceImp/auth_data_scource.dart';
+import '../../data/repositoryImp/auth_repo_imp.dart';
 import '../../domain/dataSource/auth_data_scource.dart';
 import '../../domain/repository/auth_repository.dart';
 class SignInViewModel extends ChangeNotifier{
@@ -12,21 +12,16 @@ class SignInViewModel extends ChangeNotifier{
   late AuthRepository authRepostory = AuthRepositoryImp(onlineDatASource);
   void signin(String email, String password)async{
     try{
-      // show loading
-      //navigator.ShowLoading("loading ");
+      navigator.ShowLoading("loading ");
       var response = await authRepostory.signInWithEmailAndPassword(email, password);
-      if(response.statusCode!=null){
-        // hide loading
+      if(response.message!=null){
         navigator.HideLoading();
-        // navigate to homescreen :
-        navigator.NavigateToHomeScreen();
-        // show message for now
-        navigator.ShowLoading(response.message??"");
+        navigator.ShowMessage(response.message??"");
+        print(response.message);
       }
-      else{
+      else if(response.displayName!=null){
         navigator.HideLoading();
         navigator.NavigateToHomeScreen();
-        //navigator.ShowLoading(response.message??"");
       }
     }catch(e){
       // hide lodaing
@@ -34,16 +29,5 @@ class SignInViewModel extends ChangeNotifier{
       // show (e)
       navigator.ShowMessage(e.toString());
     }
-
   }
-
-
-
-
-
-
-
-
-
-
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:plantify/ui/custom_widget/onboardind_widget.dart';
-import 'package:plantify/ui/sign_up/sign_up.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import '../custom_widget/onboardind_widget.dart';
+import '../sign_up/sign_up.dart';
 import '../theme.dart';
 class OnBoarding extends StatelessWidget {
   static const String routeName = "first onboarding";
@@ -13,9 +13,6 @@ class OnBoarding extends StatelessWidget {
     "assets/images/onboardin3.png",
     "assets/images/logo_vertivcal.png"
   ];
-
-  OnBoarding({super.key});
-  @override
   Widget build(BuildContext context) {
     var hight = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
@@ -73,8 +70,8 @@ class OnBoarding extends StatelessWidget {
           ],
         ),
         Container(
-          alignment: const Alignment(0,.8),
-            child: SmoothPageIndicator(controller: controller, count: onboardingImages.length,effect: const SwapEffect(
+          alignment: Alignment(0,.8),
+            child: SmoothPageIndicator(controller: controller, count: onboardingImages.length,effect: SwapEffect(
               dotHeight: 10,
               dotWidth: 10,
               dotColor: Colors.white,

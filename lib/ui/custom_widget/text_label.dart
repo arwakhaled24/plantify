@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:plantify/ui/theme.dart';
+
+import '../theme.dart';
 
 class LabelTextForm extends StatelessWidget {
   String text ;

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:plantify/ui/onboardin/onboarding.dart';
 
+import '../onboardin/onboarding.dart';
 @override
 class SplashScreen extends StatelessWidget {
   static const String routeName = "splash screen ";

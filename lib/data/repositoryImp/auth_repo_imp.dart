@@ -1,3 +1,5 @@
+
+
 import '../../domain/dataSource/auth_data_scource.dart';
 import '../../domain/repository/auth_repository.dart';
 import '../model/respose/Signing_respond.dart';
@@ -13,8 +15,8 @@ class AuthRepositoryImp implements AuthRepository {
   }
 
   @override
-  Future<SigningRespond> signUpWithEmailAndPassword(String email, String password,String name, String phone) {
-    return authDataSourceRepository.signUpWithEmailAndPassword(email, password,name, phone);
+  Future<SigningRespond> signUpWithEmailAndPassword(String name, String password ,String phone, String email) {
+    return authDataSourceRepository.signUpWithEmailAndPassword(name, password,phone, email);
   }
 
 

@@ -1,16 +1,12 @@
-import 'dart:convert';
 
+import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:http/http.dart';
-import 'package:http_interceptor/http/intercepted_client.dart';
-import 'package:plantify/data/model/request/Sign_in_req.dart';
-import 'package:plantify/data/model/request/Sign_up_request.dart';
+
+import '../model/request/Sign_in_req.dart';
+import '../model/request/Sign_up_request.dart';
 import '../model/respose/Signing_respond.dart';
-import 'interceptor/sign_up_interceptor.dart';
+
 class ApiManager{
-  Client client = InterceptedClient.build(interceptors: [
-    LoggingInterceptor(),
-  ]);
   //https://PlantifyApp.bsite.net/api/Account/Login
   //https://PlantifyApp.bsite.net/api/Account/Register
    static const  String baseUrl="PlantifyApp.bsite.net";
@@ -27,9 +23,7 @@ static const String endpointSignUp="/api/Account/Register";
  });
  var signInResponse= SigningRespond.fromJson(jsonDecode(respose.body));
  return signInResponse ;
-
      }
-
      static Future<SigningRespond> SignUp(String name , String email , String password , String phone ) async{
  var uri = Uri.https(baseUrl , endpointSignUp,);
     var requestbody =SignUpRequest(password: password,email:email,displayName: name,phoneNumber: phone );
@@ -39,13 +33,5 @@ var response = await  http.post(uri , body: jsonEncode(requestbody.toJson()),hea
 } );
  var SignUpresponse = SigningRespond.fromJson(jsonDecode(response.body));
  return SignUpresponse;
-
      }
-
-
-
-
-
-
-
 }

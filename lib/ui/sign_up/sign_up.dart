@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:plantify/ui/custom_widget/dialog_widget.dart';
-import 'package:plantify/ui/custom_widget/text_form_feild_widget.dart';
 import 'package:plantify/ui/sign_up/sign_up_navigator.dart';
 import 'package:plantify/ui/sign_up/sign_up_view_model.dart';
-import 'package:plantify/ui/signin/sign_in_screen.dart';
-import 'package:plantify/ui/theme.dart';
-
+import '../custom_widget/dialog_widget.dart';
+import '../custom_widget/text_form_feild_widget.dart';
 import '../custom_widget/text_label.dart';
 import '../home/Home.dart';
+import '../signin/sign_in_screen.dart';
+import '../theme.dart';
 
 class SignUpScreen extends StatefulWidget {
   static const String routeName = "sign up ";
@@ -17,8 +15,8 @@ class SignUpScreen extends StatefulWidget {
   State<SignUpScreen> createState() => _SignUpScreenState();
 }
 
-class _SignUpScreenState extends State<SignUpScreen> implements SignUpNavigator{
-
+class _SignUpScreenState extends State<SignUpScreen>
+    implements SignUpNavigator {
   final formKey = GlobalKey<FormState>();
 
   var nameController = TextEditingController();
@@ -28,11 +26,10 @@ class _SignUpScreenState extends State<SignUpScreen> implements SignUpNavigator{
   var phoneController = TextEditingController();
 
   var passwordController = TextEditingController();
-SignUpViewModel viewModel = SignUpViewModel();
+  SignUpViewModel viewModel = SignUpViewModel();
   void initState() {
-    viewModel.navigator= this ;
+    viewModel.navigator = this;
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -43,16 +40,16 @@ SignUpViewModel viewModel = SignUpViewModel();
       body: Container(
         padding: EdgeInsets.all(20),
         child: Column(
-          
           children: [
-            SizedBox(height: hieght*.04,),
+            SizedBox(
+              height: hieght * .04,
+            ),
             Center(
               child: Text(
                 "Create account",
                 style: TextStyle(
                   fontFamily: "Poppins",
                   fontWeight: FontWeight.w600,
-
                   fontSize: 33,
                 ),
               ),
@@ -139,11 +136,24 @@ SignUpViewModel viewModel = SignUpViewModel();
                         controler: passwordController,
                         hintText: "please enter your password",
                         validator: (text) {
+                          RegExp specialCharRegex = RegExp(r'[!@#\$%^&*(),.?":{}|<>]');
+
                           if (text == null || text.trim().isEmpty) {
-                            return "please enter Password";
+                            return "please enter Password must contain special caracters, capital caracters and numbers";
                           }
                           if (text.length < 6) {
-                            return "Short password & make shure that contain cpesial caracters and capital cases";
+                            return "Short password ";
+                          }
+                          if(!specialCharRegex.hasMatch(text)) {
+                            return "password must contain special caracters";
+                          }
+                          RegExp capitalCharRegex = RegExp(r'[A-Z]');
+                           if(!capitalCharRegex.hasMatch(text)) {
+                              return "password must contain capital caracters";
+                            }
+                          RegExp numbersRegex = RegExp(r'[0-9]');
+                          if(!numbersRegex.hasMatch(text)) {
+                            return "password must contain numbers";
                           }
                         },
                         isPassword: true,
@@ -155,30 +165,40 @@ SignUpViewModel viewModel = SignUpViewModel();
                         children: [
                           Text(
                             "agree with ",
-                            style: TextStyle(color: AppTheme.lightText,fontFamily: "Poppins",),
+                            style: TextStyle(
+                              color: AppTheme.lightText,
+                              fontFamily: "Poppins",
+                            ),
                           ),
                           Text(
                             "terms and conditions",
-                            style: TextStyle(color: AppTheme.green_2,fontFamily: "Poppins",),
+                            style: TextStyle(
+                              color: AppTheme.green_2,
+                              fontFamily: "Poppins",
+                            ),
                           )
                         ],
                       ),
                       SizedBox(
-                        height: hieght*.04,
+                        height: hieght * .04,
                       ),
                       ElevatedButton(
                         onPressed: () {
-                          viewModel.SignUp(nameController.text, passwordController.text, phoneController.text, emailController.text);
-                          },
+                          signupform(
+                              nameController.text,
+                              passwordController.text,
+                              phoneController.text,
+                              emailController.text);
+
+                        },
                         style: ElevatedButton.styleFrom(
                             elevation: 0, // Set elevation as needed
-                            padding: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 0, vertical: 0),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(8.0),
                             ),
-
-                            backgroundColor: Colors.transparent
-                        ),
+                            backgroundColor: Colors.transparent),
                         child: Container(
                           height: 60,
                           decoration: BoxDecoration(
@@ -187,7 +207,8 @@ SignUpViewModel viewModel = SignUpViewModel();
                               end: Alignment.bottomRight,
                               colors: [
                                 Color(0xFFAEDC81), // Lighter color on one side
-                                Color(0xFF6CC51D), // Regular color on the other side
+                                Color(
+                                    0xFF6CC51D), // Regular color on the other side
                               ],
                             ),
                             borderRadius: BorderRadius.circular(8.0),
@@ -199,38 +220,52 @@ SignUpViewModel viewModel = SignUpViewModel();
                                   color: AppTheme.mainBackground, // Text color
                                   fontWeight: FontWeight.bold,
                                   fontFamily: "Poppins",
-                                  fontSize: 18
-                              ),
+                                  fontSize: 18),
                             ),
                           ),
                         ),
                       )
-
                     ],
                   ),
                 ),
               ),
             ),
             Row(
-             mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-
-                Text("already have an account ? ",style: TextStyle(
-                  color: AppTheme.lightText,fontFamily: "Poppins",
-                ),),
+                Text(
+                  "already have an account ? ",
+                  style: TextStyle(
+                    color: AppTheme.lightText,
+                    fontFamily: "Poppins",
+                  ),
+                ),
                 InkWell(
-                  onTap: (){
+                  onTap: () {
                     Navigator.pushNamed(context, SignInScreen.routeName);
                   },
-                  child: Text("SignIn",style: TextStyle(color: AppTheme.green_2,fontFamily: "Poppins",),
-
-                  ),)
+                  child: Text(
+                    "SignIn",
+                    style: TextStyle(
+                      color: AppTheme.green_2,
+                      fontFamily: "Poppins",
+                    ),
+                  ),
+                )
               ],
             )
           ],
         ),
       ),
     );
+  }
+
+  void signupform(String name, String password, String phone, String email) {
+    if (formKey.currentState?.validate() != true) {
+      return;
+    }
+    viewModel.SignUp(nameController.text, passwordController.text,
+        phoneController.text, emailController.text);
   }
 
   @override
@@ -241,7 +276,7 @@ SignUpViewModel viewModel = SignUpViewModel();
   @override
   void NavigateToHomeScreen() {
     // TODO: implement NavigateToHomeScreen
-   Navigator.pushReplacementNamed(context, HomeScreen.routeName);
+    Navigator.pushReplacementNamed(context, HomeScreen.routeName);
   }
 
   @override
@@ -251,9 +286,13 @@ SignUpViewModel viewModel = SignUpViewModel();
   }
 
   @override
-  void ShowMessage(String message, {String? posActionTitle, VoidCallback? posAction, String? negActionTitle, VoidCallback? negAction, bool isDissMissable = true}) {
+  void ShowMessage(String message,
+      {String? posActionTitle,
+      VoidCallback? posAction,
+      String? negActionTitle,
+      VoidCallback? negAction,
+      bool isDissMissable = true}) {
     // TODO: implement ShowMessage
     DialogScreen.showmessage(context, message);
   }
 }
-
